@@ -1,9 +1,6 @@
 import time
-import platform
 
-from behave import when, step
-from selenium import webdriver
-from selenium.common.exceptions import ElementNotInteractableException
+from selenium.common.exceptions import ElementNotInteractableException, NoAlertPresentException
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -12,17 +9,8 @@ from features.configs.automation_config import TIMEOUT
 
 class BasePage:
 
-    def __init__(self, driver):
+    def __init__(self, driver) -> object:
         self.driver = driver
-
-    @staticmethod
-    @when('I open {page} page in wui admin')
-    def open_page(context, page):
-        context.driver.get(context.wui_admin_url + "/" + page)
-
-    @when("I open {page} page in Cloud")
-    def open_page(self, context, page):
-        context.driver.get(context.cloud_url + "/" + page)
 
     def find_element(self, locator, timeout=TIMEOUT):
         return WebDriverWait(self.driver, timeout).until(ec.presence_of_element_located(locator),
@@ -92,3 +80,15 @@ class BasePage:
         alert_obj = self.driver.switch_to.alert
         time.sleep(4)
         alert_obj.accept()
+
+    def get_text_alert(self, timeout=TIMEOUT):
+        start_time = time.time()
+
+        while (time.time() - start_time) < timeout:
+            try:
+                alert_obj = self.driver.switch_to.alert
+                return alert_obj.text
+            except NoAlertPresentException:
+                time.sleep(1)
+
+        assert False, "Alert is not chosen in timeout = " + str(timeout) + " secs"

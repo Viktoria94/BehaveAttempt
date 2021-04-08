@@ -1,9 +1,9 @@
 import allure
 import pytest
 
-from configs.device import WUI_ADMIN_URL
-from elements.MD.MainMenu import MDMainMenuHelper
-from elements.MD.RecordingPage import RecordingPageHelper
+from features.configs.device import WUI_ADMIN_URL
+from features.elements.MD.MainMenu import MDMainMenuHelper
+from features.elements.MD.RecordingPage import RecordingPageHelper
 
 
 @allure.feature('MD')
