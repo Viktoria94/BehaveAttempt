@@ -1,10 +1,10 @@
 import allure
 import pytest
 
-from configs.cloud import CLOUD_USERNAME, CLOUD_PASSWORD, CLOUD_URL
-from configs.cloud import GMAIL, GMAIL_PASSWORD
-from elements.Cloud.LoginPage import LoginPageHelper
-from elements.Cloud.MainMenu import CloudMainMenuHelper
+from features.configs.cloud import CLOUD_USERNAME, CLOUD_PASSWORD, CLOUD_URL
+from features.configs.cloud import GMAIL, GMAIL_PASSWORD
+from features.elements.Cloud.LoginPage import LoginPageHelper
+from features.elements.Cloud.MainMenu import CloudMainMenuHelper
 
 
 @pytest.mark.parametrize("username", [CLOUD_USERNAME, "", "wrong_username"])

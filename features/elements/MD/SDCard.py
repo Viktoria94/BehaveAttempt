@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from features.elements.BasePage import BasePage
+from .. import BasePage
 
 
 class SDCardPageLocators:
